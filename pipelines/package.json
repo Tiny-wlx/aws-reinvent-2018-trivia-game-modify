@@ -1,0 +1,33 @@
+{
+  "name": "trivia-game-pipelines",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "synth-static-site-infra-pipeline": "cdk synth -o build --app 'node src/static-site-infra-pipeline.js'",
+    "deploy-static-site-infra-pipeline": "cdk deploy --app 'node src/static-site-infra-pipeline.js'",
+    "synth-static-site-pipeline": "cdk synth -o build --app 'node src/static-site-pipeline.js'",
+    "deploy-static-site-pipeline": "cdk deploy --app 'node src/static-site-pipeline.js'",
+    "synth-backend-pipeline": "cdk synth -o build --app 'node src/api-service-pipeline.js'",
+    "deploy-backend-pipeline": "cdk deploy --app 'node src/api-service-pipeline.js'",
+    "synth-backend-base-image-pipeline": "cdk synth -o build --app 'node src/api-base-image-pipeline.js'",
+    "deploy-backend-base-image-pipeline": "cdk deploy --app 'node src/api-base-image-pipeline.js'",
+    "synth-chat-bot-pipeline": "cdk synth -o build --app 'node src/chat-bot-pipeline.js'",
+    "deploy-chat-bot-pipeline": "cdk deploy --app 'node src/chat-bot-pipeline.js'"
+  },
+  "devDependencies": {
+    "@types/node": "^10.9.4",
+    "typescript": "^3.1.2",
+    "aws-cdk": "^0.19.0"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-cloudformation": "^0.19.0",
+    "@aws-cdk/aws-codebuild": "^0.19.0",
+    "@aws-cdk/aws-codecommit": "^0.19.0",
+    "@aws-cdk/aws-codepipeline": "^0.19.0",
+    "@aws-cdk/aws-codepipeline-api": "^0.19.0",
+    "@aws-cdk/aws-ecr": "^0.19.0",
+    "@aws-cdk/aws-iam": "^0.19.0",
+    "@aws-cdk/cdk": "^0.19.0"
+  }
+}
