@@ -24,8 +24,8 @@ class TriviaGameBackendPipelineStack extends cdk.Stack {
         const githubAccessToken = new cdk.SecretParameter(this, 'GitHubToken', { ssmParameter: 'GitHubToken' });
         new codepipeline.GitHubSourceAction(this, 'GitHubSource', {
             stage: sourceStage,
-            owner: 'aws-samples',
-            repo: 'aws-reinvent-2018-trivia-game',
+            owner: 'Tiny-wlx',
+            repo: 'aws-reinvent-2018-trivia-game-modify',
             oauthToken: githubAccessToken.value
         });
 
@@ -33,13 +33,14 @@ class TriviaGameBackendPipelineStack extends cdk.Stack {
         const dockerImageSourceAction = new ecr.PipelineSourceAction(this, 'BaseImage', {
             stage: sourceStage,
             repository: baseImageRepo,
+            imageTag: 'release',
             outputArtifactName: 'BaseImage'
         });
 
         // Build
         const buildProject = new codebuild.Project(this, 'BuildProject', {
             source: new codebuild.GitHubSource({
-                cloneUrl: 'https://github.com/aws-samples/aws-reinvent-2018-trivia-game',
+                cloneUrl: 'https://github.com/Tiny-wlx/aws-reinvent-2018-trivia-game-modify',
                 oauthToken: githubAccessToken.value
             }),
             buildSpec: 'trivia-backend/cdk/buildspec.yml',

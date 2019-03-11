@@ -20,7 +20,7 @@ aws ssm put-parameter --name GitHubToken --type String --value 12345
 
 ## Customize
 
-Replace all references to 'aws-samples' with your own fork of this repo.  Replace all references to 'reinvent-trivia.com' with your own domain name.
+Replace all references to 'Tiny-wlx' with your own fork of this repo.  Replace all references to 'il1edu.com' with your own domain name.
 
 ## Deploy
 

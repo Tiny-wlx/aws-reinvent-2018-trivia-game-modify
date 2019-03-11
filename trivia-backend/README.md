@@ -1,6 +1,6 @@
 # Trivia Backend API Service
 
-The trivia backend is a REST API that serves questions and answers.  A running example can be seen on [api.reinvent-trivia.com](https://api.reinvent-trivia.com/api/docs/).
+The trivia backend is a REST API that serves questions and answers.  A running example can be seen on [api.il1edu.com](https://api.il1edu.com/api/docs/).
 
 ## Prep
 
@@ -15,14 +15,14 @@ aws ecr create-repository --repository-name reinvent-trivia-backend-base
 Create AWS Certificate Manager certificates for the 'api' and 'test-api' subdomains, then put the unique ARN of those certificates in an AWS Systems Manager Parameter Store parameter.
 
 ```
-aws ssm put-parameter --name CertificateArn-api.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --name CertificateArn-api.il1edu.com --type String --value arn:aws:acm:...
 
-aws ssm put-parameter --name CertificateArn-test-api.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --name CertificateArn-test-api.il1edu.com --type String --value arn:aws:acm:...
 ```
 
 ## Customize
 
-Replace all references to 'reinvent-trivia.com' with your own domain name.
+Replace all references to 'il1edu.com' with your own domain name.
 
 # Docker images
 
@@ -60,7 +60,7 @@ cdk synth -o build --app 'node ecs-service.js'
 
 The blue-green-setup folder contains examples of the configuration needed to setup and execute a blue-green deployment with CodeDeploy: CodeDeploy appspec file, ECS task definition file, ECS service, CodeDeploy application definition, and CodeDeploy deployment group.
 
-The hooks folder contains an example of a pre-traffic hook for use with CodeDeploy deployments.  To deploy the hook (replacing reinvent-trivia.com with your own domain name):
+The hooks folder contains an example of a pre-traffic hook for use with CodeDeploy deployments.  To deploy the hook (replacing il1edu.com with your own domain name):
 
 ```
 cd hooks
@@ -69,7 +69,7 @@ npm install
 
 aws cloudformation package --template-file template.yaml --s3-bucket <bucket-name> --output-template-file packaged-template.yaml
 
-aws cloudformation deploy --template-file packaged-template.yaml --stack-name TriviaBackendHooksTest --capabilities CAPABILITY_IAM --parameter-overrides TriviaBackendDomain=api-test.reinvent-trivia.com
+aws cloudformation deploy --template-file packaged-template.yaml --stack-name TriviaBackendHooksTest --capabilities CAPABILITY_IAM --parameter-overrides TriviaBackendDomain=api-test.il1edu.com
 
-aws cloudformation deploy --template-file packaged-template.yaml --stack-name TriviaBackendHooksProd --capabilities CAPABILITY_IAM --parameter-overrides TriviaBackendDomain=api.reinvent-trivia.com
+aws cloudformation deploy --template-file packaged-template.yaml --stack-name TriviaBackendHooksProd --capabilities CAPABILITY_IAM --parameter-overrides TriviaBackendDomain=api.il1edu.com
 ```

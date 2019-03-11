@@ -35,7 +35,7 @@ const router = express.Router();
  *     ]
  *
  * @apiExample {curl} Example usage:
- *     curl -i https://api.reinvent-trivia.com/api/trivia/all
+ *     curl -i https://api.il1edu.com/api/trivia/all
  */
 router.get('/all', function(req, res, next) {
   res.send(questions);
@@ -74,7 +74,7 @@ router.get('/all', function(req, res, next) {
  *     }
  *
  * @apiExample {curl} Example usage:
- *     curl -i https://api.reinvent-trivia.com/api/trivia/question/1
+ *     curl -i https://api.il1edu.com/api/trivia/question/1
  */
 router.get('/question/:question_id', function(req, res, next) {
   var id = req.params.question_id;
@@ -130,7 +130,7 @@ router.get('/question/:question_id', function(req, res, next) {
  * @apiExample {curl} Example usage:
  *     curl -H "Content-Type: application/json" \
  *          -d "{'answer' : 'Broomball'}" \
- *          -X POST https://api.reinvent-trivia.com/api/trivia/question/1
+ *          -X POST https://api.il1edu.com/api/trivia/question/1
  */
 router.post('/question/:question_id', function(req, res, next) {
   var id = req.params.question_id;

@@ -5,7 +5,7 @@ Description: Chat bot for reInvent trivia game
 Parameters:
   TriviaBackendEndpoint:
     Type: String
-    Default: 'https://api.reinvent-trivia.com'
+    Default: 'https://api.il1edu.com'
 
 Resources:
   BotFunction:

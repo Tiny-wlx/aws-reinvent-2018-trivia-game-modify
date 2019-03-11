@@ -24,7 +24,7 @@ aws iam create-service-linked-role --aws-service-name lex.amazonaws.com
 
 ## Customize
 
-Replace all references to 'reinvent-trivia.com' with your own domain name.
+Replace all references to 'il1edu.com' with your own domain name.
 
 ## Deploy
 

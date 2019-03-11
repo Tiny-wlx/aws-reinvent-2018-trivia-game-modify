@@ -7,14 +7,14 @@ The static site calls into the API backend service to retrieve questions and ans
 Create AWS Certificate Manager certificates for 'www' and 'test' subdomains, then put the unique ARN of those certificates in an AWS Systems Manager Parameter Store parameter.  Note that the certificates for the static site (www and test subdomains) must be created in us-east-1, because they are used by CloudFront.
 
 ```
-aws ssm put-parameter --name CertificateArn-www.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --name CertificateArn-www.il1edu.com --type String --value arn:aws:acm:...
 
-aws ssm put-parameter --name CertificateArn-test.reinvent-trivia.com --type String --value arn:aws:acm:...
+aws ssm put-parameter --name CertificateArn-test.il1edu.com --type String --value arn:aws:acm:...
 ```
 
 ## Customize
 
-Replace all references to 'reinvent-trivia.com' with your own domain name.
+Replace all references to 'il1edu.com' with your own domain name.
 
 ## Infrastructure
 

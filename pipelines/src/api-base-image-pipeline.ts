@@ -16,8 +16,8 @@ class TriviaGameBackendBaseImagePipeline extends cdk.Stack {
         const githubAccessToken = new cdk.SecretParameter(this, 'GitHubToken', { ssmParameter: 'GitHubToken' });
         new codepipeline.GitHubSourceAction(this, 'GitHubSource', {
             stage: pipeline.addStage('Source'),
-            owner: 'aws-samples',
-            repo: 'aws-reinvent-2018-trivia-game',
+            owner: 'Tiny-wlx',
+            repo: 'aws-reinvent-2018-trivia-game-modify',
             oauthToken: githubAccessToken.value
         });
 

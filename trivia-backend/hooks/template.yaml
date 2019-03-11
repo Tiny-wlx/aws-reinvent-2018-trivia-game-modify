@@ -5,7 +5,7 @@ Description: Validation hooks for trivia backend
 Parameters:
   TriviaBackendDomain:
     Type: String
-    Default: 'api.reinvent-trivia.com'
+    Default: 'api.il1edu.com'
 
   TriviaBackendTestPort:
     Type: Number
@@ -37,7 +37,7 @@ Resources:
         Role: ""
       Environment:
         Variables:
-          TargetUrl: !Join # Example: https://api.reinvent-trivia.com:9002/api/trivia/all
+          TargetUrl: !Join # Example: https://api.il1edu.com:9002/api/trivia/all
             - ''
             - - 'https://'
               - !Ref TriviaBackendDomain
