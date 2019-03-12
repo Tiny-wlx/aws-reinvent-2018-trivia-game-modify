@@ -1,0 +1,74 @@
+{
+  "applicationName": "AppECS-default-trivia-backend-prod",
+  "autoRollbackConfiguration": {
+    "enabled": true,
+    "events": [
+      "DEPLOYMENT_FAILURE",
+      "DEPLOYMENT_STOP_ON_REQUEST",
+      "DEPLOYMENT_STOP_ON_ALARM"
+    ]
+  },
+  "blueGreenDeploymentConfiguration": {
+    "deploymentReadyOption": {
+      "actionOnTimeout": "CONTINUE_DEPLOYMENT",
+      "waitTimeInMinutes": 0
+    },
+    "terminateBlueInstancesOnDeploymentSuccess": {
+      "action": "TERMINATE",
+      "terminationWaitTimeInMinutes": 1
+    }
+  },
+  "deploymentStyle": {
+    "deploymentOption": "WITH_TRAFFIC_CONTROL",
+    "deploymentType": "BLUE_GREEN"
+  },
+  "loadBalancerInfo": {
+    "targetGroupPairInfoList": [
+      {
+        "targetGroups": [
+          {
+            "name": "Trivi-Servi-13NNIT0OP8SBU"
+          },
+          {
+            "name": "Trivi-Servi-ZCV8T9BLI09V"
+          }
+        ],
+        "prodTrafficRoute": {
+          "listenerArns": [
+            "arn:aws:elasticloadbalancing:us-east-1:155561722982:listener/app/Trivi-Servi-1DB72Y4NSZZEE/dee979d3d41776a0/6a2dd926f05fc24d"
+          ]
+        },
+        "testTrafficRoute": {
+          "listenerArns": [
+            "arn:aws:elasticloadbalancing:us-east-1:155561722982:listener/app/Trivi-Servi-1DB72Y4NSZZEE/dee979d3d41776a0/e44607f6ef5af0cf"
+          ]
+        }
+      }
+    ]
+  },
+  "alarmConfiguration": {
+    "enabled": true,
+    "ignorePollAlarmFailure": false,
+    "alarms": [
+      {
+        "name": "TriviaBackendProd-TargetGroup25xx2FAF422E-159FMZ9TGEI1H"
+      },
+      {
+        "name": "TriviaBackendProd-TargetGroup2UnhealthyHosts9640140F-1FS5AZQA1K6YW"
+      },
+      {
+        "name": "TriviaBackendProd-TargetGroup5xx43EFCD6E-1D3TKK3Z5NES3"
+      },
+      {
+        "name": "TriviaBackendProd-TargetGroupUnhealthyHosts734E7711-OH56N44UEGNB"
+      }
+    ]
+  },
+  "serviceRoleArn": "arn:aws:iam::155561722982:role/CodeDeployServiceRole",
+  "ecsServices": [
+    {
+      "serviceName": "trivia-backend-prod",
+      "clusterName": "default"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "taskDefinition": "trivia-backend:1",
+  "cluster": "default",
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:155561722982:targetgroup/Trivi-Servi-ZCV8T9BLI09V/e91de93c7278a19b",
+      "containerName": "web",
+      "containerPort": 80
+    }
+  ],
+  "desiredCount": 3,
+  "launchType": "FARGATE",
+  "schedulingStrategy": "REPLICA",
+  "deploymentController": {
+    "type": "CODE_DEPLOY"
+  },
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-0454b00ab55802629",
+        "subnet-0ceae7978cf5707a7"
+      ],
+      "securityGroups": [
+        "sg-08ee616440e5aa792"
+      ],
+      "assignPublicIp": "DISABLED"
+    }
+  }
+}
