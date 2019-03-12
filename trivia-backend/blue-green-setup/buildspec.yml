@@ -11,8 +11,9 @@ phases:
   #     - apt-get install -y jq
   #     - npm install -g npm@6.4.1
 
-  # pre_build:
-  #   commands:
+  pre_build:
+    commands:
+      - pip install awscli --upgrade --user
   #     # Set up environment variables like image tag and repo
   #     - cd $CODEBUILD_SRC_DIR/trivia-backend
   #     - export IMAGE_TAG=build-`echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}'`
