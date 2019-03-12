@@ -26,8 +26,8 @@ phases:
 
   build:
     commands:
-      # - aws ecs deploy --service trivia-backend-prod --task-definition task-definition.json --codedeploy-appspec build/appspec-prod.json
-      - ls
+      - aws ecs deploy --service trivia-backend-prod --task-definition task-definition.json --codedeploy-appspec build/appspec-prod.json
+      # - ls
       # # Build Docker image
       # - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       # - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
