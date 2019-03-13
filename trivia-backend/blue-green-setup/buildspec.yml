@@ -27,6 +27,7 @@ phases:
 
   build:
     commands:
+      - pwd
       - ls
       - aws ecs deploy --service trivia-backend-prod --task-definition task-definition.json --codedeploy-appspec appspec-prod.json
       # - ls
