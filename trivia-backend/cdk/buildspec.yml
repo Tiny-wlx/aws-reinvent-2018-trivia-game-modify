@@ -42,4 +42,6 @@ phases:
 artifacts:
   files:
     - trivia-backend/cdk/build/*
+    - trivia-backend/blue-green-setup/task-definition.json
+    - trivia-backend/blue-green-setup/build/appspec-prod.json
   discard-paths: yes
