@@ -118,26 +118,59 @@ class TriviaGameBackendPipelineStack extends cdk.Stack {
             changeSetName,
             runOrder: 2
         });
+        //
+        // // Prod
+        // const prodStage = pipeline.addStage('Prod');
+        // const prodStackName = 'TriviaBackendProd';
+        //
+        // new cfn.PipelineCreateReplaceChangeSetAction(this, 'PrepareChanges', {
+        //     stage: prodStage,
+        //     stackName: prodStackName,
+        //     changeSetName,
+        //     runOrder: 1,
+        //     adminPermissions: true,
+        //     templatePath: buildAction.outputArtifact.atPath(templatePrefix + 'Prod.template.yaml'),
+        // });
+        //
+        // new cfn.PipelineExecuteChangeSetAction(this, 'ExecuteChangesProd', {
+        //     stage: prodStage,
+        //     stackName: prodStackName,
+        //     changeSetName,
+        //     runOrder: 2
+        // });
 
-        // Prod
-        const prodStage = pipeline.addStage('Prod');
-        const prodStackName = 'TriviaBackendProd';
-
-        new cfn.PipelineCreateReplaceChangeSetAction(this, 'PrepareChanges', {
-            stage: prodStage,
-            stackName: prodStackName,
-            changeSetName,
-            runOrder: 1,
-            adminPermissions: true,
-            templatePath: buildAction.outputArtifact.atPath(templatePrefix + 'Prod.template.yaml'),
+        // Manual approval
+        const approveStage = pipeline.addStage('Approve');
+        new codepipeline.ManualApprovalAction(this, 'ApproveChanges', {
+            stage: approveStage,
+            runOrder: 1
         });
 
-        new cfn.PipelineExecuteChangeSetAction(this, 'ExecuteChangesProd', {
-            stage: prodStage,
-            stackName: prodStackName,
-            changeSetName,
-            runOrder: 2
+        // Build
+        const bGbuildStage = pipeline.addStage('BlueGreenBuild');
+        const bGbuildProject = new codebuild.PipelineProject(this, 'BlueGreenDeploy', {
+            buildSpec: 'buildspec.yml',
+            environment: {
+                buildImage: codebuild.LinuxBuildImage.UBUNTU_14_04_DOCKER_17_09_0,
+                privileged: true
+            }
         });
+        bGbuildProject.addToRolePolicy(new iam.PolicyStatement()
+            .addAllResources()
+            .addActions("ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetRepositoryPolicy",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload",
+                "ecr:PutImage",
+                "ecs:DescribeServices"));
+        bGbuildProject.addToPipeline(bGbuildStage, 'CodeBuild');
     }
 }
 
